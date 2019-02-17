@@ -1,0 +1,59 @@
+
+input {
+    border-radius:10px;
+    -moz-border-radius:10px;
+    -ms-border-radius:10px;
+    -o-border-radius:10px;
+    -webkit-border-radius:10px;
+
+    border:1px solid #ccc;
+    font-size:14pt;
+    padding:5px 10px;
+}
+.header {
+  font-size: 16px;
+  padding: 10px;
+  color: white;
+  text-align: center;
+  background-image: url("michelin.jpeg");
+  background-size: cover;
+  background-position: center;
+  margin-bottom: 20px;
+}
+
+.sortable a
+{
+    display:block;
+    text-decoration:none;
+}
+
+#wrapper {
+  display: block;
+  width: 1200px;
+  height:550px;
+  background: #FAFAD2;
+  margin: 0 auto;
+  padding: 10px 17px;
+  -webkit-box-shadow: 2px 2px 3px -1px rgba(0,0,0,0.35);
+  overflow-y: scroll;
+  margin-bottom: 10px;
+}
+
+
+#showtable thead {
+	text-align: center;
+  cursor: pointer;
+  background: #F5DEB3;
+}
+
+#showtable thead tr th { 
+	text-align: center;
+  font-weight: bold;
+  padding: 12px 30px;
+  padding-left: 100px;
+}
+
+#showtable tbody tr td {
+  text-align: center;
+  padding: 15px 10px;
+}
