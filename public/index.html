@@ -40,7 +40,13 @@ body{
                <thead align="center">
                    <th>picture</th>
                    <th>Restaurant</th>   
-                   <th>Stars</th> 
+                   <th>
+                    <label style="padding-right:10px">Stars</label><select id="sortSelect" style="padding-left :10px">
+                    <option value="default">default</option>
+                    <option value="descending">Descending</option>
+                    <option value="ascending">Ascending</option>
+</select>
+                   </th> 
                    <th>Location</th>   
                    <th>URL</th> 
                </thead>
@@ -52,6 +58,7 @@ body{
   </body>
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script>
+      var obj=[];
       $(document).ready(function () {
                 $.ajax({
                     url: "http://127.0.0.1:8081/listhotels",
@@ -63,17 +70,52 @@ body{
                         obj = JSON.parse(result);
                         $("#text").val(obj.name)
                         //alert(obj[0].name)
-                        for(var i =0;i<100;i++){
-
- // var str = "<tr><td >Bar name</td><td><div id='bar'><input class='js-name' type='text'/></td></div>"
-  var str = "<tr><td ><img src='"+obj[i].image+"' width='200' height='100'></td><td>"+obj[i].name+"</td><td>"+obj[i].michelinStars+"</td><td>"+obj[i].location+"</td><td><a href="+obj[i].michelinUrl+">More Detail</a></td>"
-  $(str).appendTo($("#showtable"));
-}
+                        showTable(obj);
                         //alert(obj[0].michelinStars)
                     }
             });
         });
        var $table = $("#showtable");
+       function showTable(data){
+          for(var i =0;i<100;i++){
+
+           // var str = "<tr><td >Bar name</td><td><div id='bar'><input class='js-name' type='text'/></td></div>"
+            var str = "<tr><td ><img src='"+data[i].image+"' width='200' height='100'></td><td>"+data[i].name+"</td><td>"+data[i].michelinStars+"</td><td>"+data[i].location+"</td><td><a href="+data[i].michelinUrl+">More Detail</a></td>"
+            $(str).appendTo($("#showtable"));
+          }
+       }
+       // function sortData(data){
+       //  data.sort((a,b)=>{
+       //      return b.michelinStars-a.michelinStars;
+       //  });
+       //  return data;
+       // }
+       function showSortTableByStars(data){
+          $("#showtable tbody").html("");
+          showTable(data);
+       }
+       $("#sortSelect").change(()=>{
+        var data=obj.slice();
+         const selected=$("#sortSelect").val();
+         switch(selected){
+          // case "default":{
+          //   console.log("default");
+          // }break;
+          case "descending":{
+            data.sort((a,b)=>{
+            return b.michelinStars-a.michelinStars;
+          });
+          }break;
+          case "ascending":{
+            data.sort((a,b)=>{
+            return a.michelinStars-b.michelinStars;
+        });
+          }break;
+         }
+         //end switch
+
+         showSortTableByStars(data);
+       })
         
 
 
